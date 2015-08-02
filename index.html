@@ -1,0 +1,13 @@
+<?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?>
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="container-fluid">
+      <div id="content"></div>
+    </div>
+  </body>
+</html>
+
+<!-- Use a templated HTML printing scriptlet to import JavaScript. -->
+<?!= HtmlService.createHtmlOutputFromFile('JavaScript').getContent(); ?>
+
