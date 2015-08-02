@@ -37,7 +37,7 @@ var TeamList = React.createClass({
     });
     
     return (
-      <div className="teamList">
+      <div className="row">
         {teamNodes}
       </div>
     );
@@ -47,11 +47,21 @@ var TeamList = React.createClass({
 var Team = React.createClass({
   render: function() {
     return (
-      <div className="jumbotron">
-        <div className="container">
-          <h2 className="teamName">{this.props.name}</h2>
+      <div className="col-md-4">
+      <div className="panel panel-default">
+        <div className="panel-heading">{this.props.name}</div>
+        <div className="panel-body team-properties">
+          <dl className="dl-horizontal">
+            <dt>Mission</dt>
+            <dd>{this.props.mission}</dd>
+            <dt>Vision</dt>
+            <dd>{this.props.vision}</dd>
+            <dt>Constraints</dt>
+            <dd>{this.props.constraints}</dd>
+          </dl>
           <TeamMembers members={this.props.members}></TeamMembers>
         </div>
+      </div>
       </div>
     );
   }
@@ -66,8 +76,8 @@ var TeamMembers = React.createClass({
     });
     
     return (
-      <div className="teamMemberList">
-        {teamMemberNodes}
+      <div>
+      {teamMemberNodes}
       </div>
     );
   }
@@ -76,7 +86,7 @@ var TeamMembers = React.createClass({
 var TeamMember = React.createClass({
   render: function() {
     return (
-          <img src={"http://gravatar.com/avatar/" + md5(this.props.email) + ".png"} />
+          <a href={"mailto:" + this.props.email}><img src={"https://gravatar.com/avatar/" + md5(this.props.email) + ".png"} /></a>
     );
   }
 });
