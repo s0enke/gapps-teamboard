@@ -25,6 +25,4 @@ This is an experiment. Some key success indicators could be:
 ## The future
 
  - Use native Google Apps teams feature
- - Use native Photo API instead of Gravatar:
-   https://developers.google.com/admin-sdk/directory/v1/reference/users/photos
  - Make it more interactive, e.g. vote team mission/vision up/down or add comments

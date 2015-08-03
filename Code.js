@@ -17,7 +17,12 @@ function getMembersFromGroup(groupEmail) {
   
   var members = [];
   for (var i = 0; i < users.length; i++) {
-    members.push(users[i].getEmail());
+    var email = users[i].getEmail();
+    var userInfo = getUserInformation(email);
+    if (userInfo === null) {
+      continue;
+    }
+    members.push(userInfo);
   }
   return members;
 }
@@ -50,4 +55,22 @@ function getTeamsSinglePointOfTruth() {
   }
   
   return teamStruct;
+}
+
+function getUserInformation(email) {
+  try {
+    var user = AdminDirectory.Users.get(
+      email,
+      {
+        viewType: 'domain_public'
+      }
+    );
+    return {
+      'email': user.primaryEmail,
+      'thumbnailPhotoUrl': user.thumbnailPhotoUrl,
+      'name': user.name.fullName
+    };
+  } catch (e) {
+    return null;
+  }
 }

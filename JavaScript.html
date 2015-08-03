@@ -71,7 +71,7 @@ var TeamMembers = React.createClass({
   render: function() {
     var teamMemberNodes = this.props.members.map(function (member) {
       return (
-        <TeamMember key={member} email={member} />
+        <TeamMember key={member.email} {...member} />
       );
     });
     
@@ -86,7 +86,7 @@ var TeamMembers = React.createClass({
 var TeamMember = React.createClass({
   render: function() {
     return (
-          <a href={"mailto:" + this.props.email}><img src={"https://gravatar.com/avatar/" + md5(this.props.email) + ".png"} /></a>
+       <a href={"mailto:" + this.props.email}><img alt={this.props.name} title={this.props.name} src={this.props.thumbnailPhotoUrl} /></a>
     );
   }
 });
