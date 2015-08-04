@@ -22,6 +22,20 @@ This is an experiment. Some key success indicators could be:
    Apps anyway
  - Make it easy to update the wall by using a "database" everyone can update 
 
+## Setup instructions
+
+xxx
+
+## Development instructions
+
+xxx
+
+## FAQ
+
+### Team members are not displayed.
+
+xxx
+
 ## The future
 
  - Use native Google Apps teams feature
