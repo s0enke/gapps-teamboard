@@ -12,9 +12,15 @@ function getTeams() {
 }
 
 function getMembersFromGroup(groupEmail) {
-  var group = GroupsApp.getGroupByEmail(groupEmail);
-  var users = group.getUsers();
   
+  try {
+    var group = GroupsApp.getGroupByEmail(groupEmail);
+    var users = group.getUsers();
+  } catch (e) {
+    // probably no access
+    return [];
+  }
+
   var members = [];
   for (var i = 0; i < users.length; i++) {
     var email = users[i].getEmail();
