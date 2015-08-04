@@ -41,7 +41,7 @@ function getTeamsSinglePointOfTruth() {
 
 
   var teamCount = doc.getSheets()[0].getLastRow() - 1;
-  var range = doc.getRange('A2:' + 'G' + (teamCount + 1));
+  var range = doc.getRange('A2:' + 'I' + (teamCount + 1));
   
   var teamStruct = [];
   
@@ -56,6 +56,8 @@ function getTeamsSinglePointOfTruth() {
       'floor':  range.getCell(i, 5).getValue(),
       'email':  teamMailingList,
       'members': getMembersFromGroup(teamMailingList),
+      'ticket': range.getCell(i, 7).getValue(),
+      'chat': range.getCell(i, 8).getValue(),
     });
     
   }
