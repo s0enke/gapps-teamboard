@@ -40,8 +40,8 @@ function getTeamsSinglePointOfTruth() {
   var doc = SpreadsheetApp.openById(sourceSpreadsheetDocumentId);
 
 
-  var teamCount = doc.getSheets()[0].getLastRow() - 1;
-  var range = doc.getRange('A2:' + 'I' + (teamCount + 1));
+  var teamCount = doc.getSheets()[0].getLastRow() - 2;
+  var range = doc.getRange('A3:' + 'I' + (teamCount + 2));
   
   var teamStruct = [];
   
