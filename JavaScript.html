@@ -8,13 +8,16 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script src="https://cdn.rawgit.com/quickleft/react-loader/master/lib/react-loader.js"></script>
+
 <script type="text/jsx">
 
 // tutorial1.js
 var TeamList = React.createClass({
 
   getInitialState: function() {
-    return {data: []};
+    return {data: [], loaded: false};
   },
 
   componentDidMount: function() {
@@ -23,7 +26,7 @@ var TeamList = React.createClass({
 
     google.script.run
        .withSuccessHandler(function(teams) {
-          that.setState({data: teams});
+          that.setState({data: teams, loaded: true});
           })
        .getTeams();
   },
@@ -37,9 +40,11 @@ var TeamList = React.createClass({
     });
     
     return (
-      <div className="row">
-        {teamNodes}
-      </div>
+      <Loader loaded={this.state.loaded}>
+        <div className="row">
+          {teamNodes}
+        </div>
+      </Loader>
     );
   }
 });
