@@ -11,6 +11,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 <script src="https://cdn.rawgit.com/quickleft/react-loader/master/lib/react-loader.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js"></script>
+
 <script type="text/jsx">
 
 // tutorial1.js
@@ -98,7 +100,8 @@ var TeamMember = React.createClass({
   render: function() {
     var memberPhoto = this.props.thumbnailPhotoUrl
     if (memberPhoto == undefined) {
-      memberPhoto = "http://www.clker.com/cliparts/L/7/M/E/3/Q/silhouette-of-woman-th.png"
+      gravatarHash = md5(this.props.email);
+      memberPhoto = "//www.gravatar.com/avatar/" + gravatarHash + "?s=96&d=" + encodeURIComponent("http://www.clker.com/cliparts/L/7/M/E/3/Q/silhouette-of-woman-th.png");
     }
 
     return (
