@@ -32,13 +32,13 @@ var TeamList = React.createClass({
   },
 
   render: function() {
-  
+
     var teamNodes = this.state.data.map(function (team) {
       return (
         <Team key={team.name} {...team} />
       );
     });
-    
+
     return (
       <Loader loaded={this.state.loaded}>
         <div className="row">
@@ -85,9 +85,9 @@ var TeamMembers = React.createClass({
         <TeamMember key={member.email} {...member} />
       );
     });
-    
+
     return (
-      <div>
+      <div className="team_members">
       {teamMemberNodes}
       </div>
     );
@@ -96,8 +96,15 @@ var TeamMembers = React.createClass({
 
 var TeamMember = React.createClass({
   render: function() {
+    var memberPhoto = this.props.thumbnailPhotoUrl
+    if (memberPhoto == undefined) {
+      memberPhoto = "http://www.clker.com/cliparts/L/7/M/E/3/Q/silhouette-of-woman-th.png"
+    }
+
     return (
-       <a href={"mailto:" + this.props.email}><img alt={this.props.name} title={this.props.name} src={this.props.thumbnailPhotoUrl} /></a>
+       <a href={"mailto:" + this.props.email}>
+         <img className="member_image" alt={this.props.name} title={this.props.name} src={memberPhoto} />
+       </a>
     );
   }
 });
