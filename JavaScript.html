@@ -1,15 +1,18 @@
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
-<script src="https://cdn.rawgit.com/quickleft/react-loader/master/lib/react-loader.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+<script src="//cdn.rawgit.com/quickleft/react-loader/master/lib/react-loader.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
 
 <script type="text/jsx">
 
@@ -32,16 +35,16 @@ var TeamList = React.createClass({
   },
 
   render: function() {
-  
+
     var teamNodes = this.state.data.map(function (team) {
       return (
         <Team key={team.name} {...team} />
       );
     });
-    
+
     return (
       <Loader loaded={this.state.loaded}>
-        <div className="row">
+        <div className="row grid">
           {teamNodes}
         </div>
       </Loader>
@@ -52,7 +55,7 @@ var TeamList = React.createClass({
 var Team = React.createClass({
   render: function() {
     return (
-      <div className="col-md-4">
+      <div className="col-md-4 iso-flow">
       <div className="panel panel-default">
         <div className="panel-heading">{this.props.name}</div>
         <div className="panel-body team-properties">
@@ -85,19 +88,34 @@ var TeamMembers = React.createClass({
         <TeamMember key={member.email} {...member} />
       );
     });
-    
+
     return (
-      <div>
+      <div className="team_members">
       {teamMemberNodes}
       </div>
     );
+  },
+  componentDidMount: function() {
+    $('.grid').isotope({
+      // options
+      itemSelector: '.iso-flow',
+      layoutMode: 'masonry'
+    });
   }
 });
 
 var TeamMember = React.createClass({
   render: function() {
+    var memberPhoto = this.props.thumbnailPhotoUrl
+    if (memberPhoto == undefined) {
+      gravatarHash = md5(this.props.email);
+      memberPhoto = "//www.gravatar.com/avatar/" + gravatarHash + "?s=96&d=" + encodeURIComponent("http://www.clker.com/cliparts/L/7/M/E/3/Q/silhouette-of-woman-th.png");
+    }
+
     return (
-       <a href={"mailto:" + this.props.email}><img alt={this.props.name} title={this.props.name} src={this.props.thumbnailPhotoUrl} /></a>
+       <a href={"mailto:" + this.props.email}>
+         <img className="member_image" alt={this.props.name} title={this.props.name} src={memberPhoto} />
+       </a>
     );
   }
 });
